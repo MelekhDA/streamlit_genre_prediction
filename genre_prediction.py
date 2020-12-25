@@ -2,9 +2,6 @@ import pickle
 from time import time
 
 import streamlit as st
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.multiclass import OneVsRestClassifier
 
 PATH_VECTORIZER = 'models/vectorizer.pkl'
 PATH_MLB = 'models/multi_label_binarizer.pkl'
@@ -28,9 +25,9 @@ def min_max_scaler(genres_proba: list) -> list:
 class Classifier:
 
     def __init__(self):
-        self.vectorizer: TfidfVectorizer = load_model(PATH_VECTORIZER)
-        self.mlb: MultiLabelBinarizer = load_model(PATH_MLB)
-        self.logreg: OneVsRestClassifier = load_model(PATH_LOGREG)
+        self.vectorizer = load_model(PATH_VECTORIZER)
+        self.mlb = load_model(PATH_MLB)
+        self.logreg = load_model(PATH_LOGREG)
 
     def predict(self, text: str) -> list:
         vectorized_text = self.vectorizer.transform([text])
